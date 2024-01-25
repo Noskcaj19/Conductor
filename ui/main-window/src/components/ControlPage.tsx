@@ -91,9 +91,9 @@ const ControlPage = (props: Props) => (
                     <b>{+props.robotState.voltage.toFixed(2)}V</b>
                 </p>
             </div>
-            <div className="col">
+            {/* <div className="col">
                 <StdoutView />
-            </div>
+            </div> */}
         </div>
         <div className="row" style={{marginTop: "-50px"}}>
             <div className="col-3 text-center mt-4">
@@ -107,14 +107,14 @@ const ControlPage = (props: Props) => (
             </div>
             <div className="col" />
         </div>
-        <div className="row">
+        {/* <div className="row">
             <div className="col" />
             <div className="col" />
             <div className="col" />
             <div className="col" style={{marginTop: "-15px"}}>
                 {simulatorBadge(props.robotState.simulatorConnected)}
             </div>
-        </div>
+        </div> */}
     </div>
 )
 

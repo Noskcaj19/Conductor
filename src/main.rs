@@ -74,44 +74,44 @@ fn main() -> WVResult {
         .invoke_handler(|_, _| Ok(()))
         .build()?;
 
-    #[cfg(target_os = "linux")]
-    let mut stdout_wv = web_view::builder()
-        .title("Robot Console")
-        .content(Content::Url(&format!("http://localhost:{}/stdout", port)))
-        .size(650, 650)
-        .resizable(true)
-        .debug(true)
-        .user_data(())
-        .invoke_handler(|_, _| Ok(()))
-        .build()?;
+    //#[cfg(target_os = "linux")]
+    //let mut stdout_wv = web_view::builder()
+    //    .title("Robot Console")
+    //    .content(Content::Url(&format!("http://localhost:{}/stdout", port)))
+    //    .size(650, 650)
+    //    .resizable(true)
+    //    .debug(true)
+    //    .user_data(())
+    //    .invoke_handler(|_, _| Ok(()))
+    //    .build()?;
 
     for _ in 0..100 {
         match webview.step() {
             Some(res) => res?,
             None => return Ok(()),
         }
-        #[cfg(target_os = "linux")]
-        {
-            match stdout_wv.step() {
-                Some(res) => res?,
-                None => return Ok(()),
-            }
-        }
+        // #[cfg(target_os = "linux")]
+        // {
+        //     match stdout_wv.step() {
+        //         Some(res) => res?,
+        //         None => return Ok(()),
+        //     }
+        // }
     }
 
     // Need to call this to start the app so that it knows the port to connect to
     webview.eval(&format!("window.startapp({})", port)).unwrap();
-    #[cfg(target_os = "linux")]
-    stdout_wv
-        .eval(&format!("window.startapp({})", port))
-        .unwrap();
-
+    //#[cfg(target_os = "linux")]
+    //stdout_wv
+    //    .eval(&format!("window.startapp({})", port))
+    //    .unwrap();
+    //
     let addr = rx.recv().unwrap();
-    #[cfg(target_os = "linux")]
-    {
-        let stdout_addr = stdout_rx.recv().unwrap();
-        addr.do_send(SetAddr { addr: stdout_addr });
-    }
+    //#[cfg(target_os = "linux")]
+    //{
+    //    let stdout_addr = stdout_rx.recv().unwrap();
+    //    addr.do_send(SetAddr { addr: stdout_addr });
+    //}
     state.write().unwrap().wire_stdout(addr.clone());
 
     if cfg.team_number != 0 {
@@ -168,13 +168,13 @@ fn main() -> WVResult {
             None => break,
         }
 
-        #[cfg(target_os = "linux")]
-        {
-            match stdout_wv.step() {
-                Some(res) => res?,
-                None => break,
-            }
-        }
+        //#[cfg(target_os = "linux")]
+        //{
+        //    match stdout_wv.step() {
+        //        Some(res) => res?,
+        //        None => break,
+        //    }
+        //}
     }
 
     cfg.team_number = end_state.read().unwrap().ds.team_number();

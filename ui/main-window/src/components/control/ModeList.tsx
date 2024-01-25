@@ -17,8 +17,8 @@ type Props = ConnectedProps<typeof connector>;
 
 const ModeList = (props: Props) => (
     <div className="btn-group-vertical">
-        {modeItem(props, Mode.Autonomous)}
         {modeItem(props, Mode.Teleoperated)}
+        {modeItem(props, Mode.Autonomous)}
         {modeItem(props, Mode.Test)}
     </div>
 )

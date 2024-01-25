@@ -17,7 +17,7 @@ impl State {
 
         State {
             ds,
-            mode: Mode::Autonomous,
+            mode: Mode::Teleoperated,
             has_joysticks: false,
         }
     }

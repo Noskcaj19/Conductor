@@ -69,7 +69,7 @@ export function initState(): DriverStationState {
         gsm: "",
         enabled: false,
         estopped: false,
-        mode: Mode.Autonomous,
+        mode: Mode.Teleoperated,
         alliance: {
             color: AllianceColour.Red,
             value: 1
